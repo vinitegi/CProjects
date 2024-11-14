@@ -1,0 +1,3 @@
+C:/Users/vinic/CLionProjects/curso_c/secao10/ex003/cmake-build-debug/CMakeFiles/ex003.dir
+C:/Users/vinic/CLionProjects/curso_c/secao10/ex003/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/vinic/CLionProjects/curso_c/secao10/ex003/cmake-build-debug/CMakeFiles/rebuild_cache.dir
