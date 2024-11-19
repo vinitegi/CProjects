@@ -9,6 +9,7 @@ int main() {
     if (arq) {
         while ((c = getc(arq)) != EOF) { //EOF -> END OF FILE
             printf("%c", c);
+
         }
     } else {
         printf("nao achei o arquivo");
