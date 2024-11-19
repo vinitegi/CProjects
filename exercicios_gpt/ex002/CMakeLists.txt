@@ -3,4 +3,4 @@ project(ex002 C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(untitled main.c)
+add_executable(ex002 main.c)
