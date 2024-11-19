@@ -1,3 +1,0 @@
-C:/Users/vinic/CLionProjects/exercicios_gpt/ex002/cmake-build-debug/CMakeFiles/ex002.dir
-C:/Users/vinic/CLionProjects/exercicios_gpt/ex002/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/vinic/CLionProjects/exercicios_gpt/ex002/cmake-build-debug/CMakeFiles/rebuild_cache.dir
