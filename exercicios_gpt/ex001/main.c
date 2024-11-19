@@ -20,6 +20,7 @@ int main() {
     trocar(&a, &b);
 
     printf("\n\ndepois da troca:\n a = %d\n b = %d", a, b);
+    printf("\n\ndepois da troca:\n a = %d\n b = %d", a, b);
 
 
 
