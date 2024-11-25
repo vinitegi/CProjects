@@ -23,3 +23,9 @@ int main() {
 
     return 0;
 }
+
+/*PRINCIPAIS MODOs DE ABERTURA DOS ARQUIVOS
+ * "r" -> leitura
+ * "w" -> escrita com sobreposição de conteudo
+ * "a" -> escrita com adição de conteudo
+ */
