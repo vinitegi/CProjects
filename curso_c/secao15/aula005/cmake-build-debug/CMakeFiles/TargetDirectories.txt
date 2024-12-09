@@ -1,0 +1,3 @@
+C:/Users/vinic/CLionProjects/CProjects/secao15/aula005/cmake-build-debug/CMakeFiles/aula005.dir
+C:/Users/vinic/CLionProjects/CProjects/secao15/aula005/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/vinic/CLionProjects/CProjects/secao15/aula005/cmake-build-debug/CMakeFiles/rebuild_cache.dir
