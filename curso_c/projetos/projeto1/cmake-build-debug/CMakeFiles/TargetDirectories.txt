@@ -1,3 +1,0 @@
-C:/Users/vinic/CLionProjects/CProjects/projetos/projeto1/cmake-build-debug/CMakeFiles/projeto1.dir
-C:/Users/vinic/CLionProjects/CProjects/projetos/projeto1/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/vinic/CLionProjects/CProjects/projetos/projeto1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
