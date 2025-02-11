@@ -1,9 +1,6 @@
 #include <stdio.h>
-#include <locale.h>
 
 int main(void) {
-    setlocale(LC_ALL, "pt_BR.UTF-8"); // Habilita suporte a acentuação
-
     int m[3][3];
     int soma = 0;
 
