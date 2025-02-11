@@ -1,16 +1,22 @@
 #include <stdio.h>
+#include <locale.h>
 
 int main(void) {
+    setlocale(LC_ALL, "pt_BR.UTF-8"); // Habilita suporte a acentuação
+
     int m[3][3];
     int soma = 0;
 
+    // Entrada de dados
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
-            printf("Digite o valor de m[%i][%i]:\n", i, j);
-                scanf("%i", &m[i][j]);
+            printf("Digite o valor de m[%i][%i]: ", i, j);
+            scanf("%i", &m[i][j]);
         }
     }
 
+    // Impressão da matriz
+    printf("\nMatriz digitada:\n");
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             printf("[%i] ", m[i][j]);
@@ -18,14 +24,11 @@ int main(void) {
         printf("\n");
     }
 
+    // Cálculo da soma da diagonal principal
     for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            if (i == j) {
-                soma += m[i][j];
-            }
-        }
+        soma += m[i][i];
     }
 
-    printf("A soma da diagonal principal é: %i", soma);
+    printf("\nA soma da diagonal principal é: %i\n", soma);
     return 0;
 }
