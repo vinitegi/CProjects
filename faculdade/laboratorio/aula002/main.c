@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int isPrimo(int num) {
-    for (int i = 2; i < num; i++) {
+    for (int i = 2; i < num / 2; i++) {
         if (num % i == 0) {
             return 0;
         }
@@ -18,7 +18,7 @@ int main(void) {
     if (isPrimo(num) == 1) {
         printf("\nO numero eh primo");
     } else {
-        printf("\n O numero nao eh primo");
+        printf("\nO numero nao eh primo");
     }
     return 0;
 }
