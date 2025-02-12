@@ -11,14 +11,21 @@ int isPrimo(int num) {
 
 int main(void) {
     int num;
-    printf("Digite um numero: ");
-    fflush(stdin);
-    scanf("%i", &num);
+    int primos[10];
+    int contaPrimos = 0;
 
-    if (isPrimo(num) == 1) {
-        printf("\nO numero eh primo");
-    } else {
-        printf("\nO numero nao eh primo");
+    while (contaPrimos < 10) {
+        printf("Digite um numero: ");
+        fflush(stdin);
+        scanf("%i", &num);
+
+        if (isPrimo(num) == 1) {
+            primos[contaPrimos] = num;
+            contaPrimos++;
+            printf("\nNumero adicionado com sucesso!");
+        }
+        printf("\nExistem %i numeros no vetor", contaPrimos);
     }
+
     return 0;
 }
