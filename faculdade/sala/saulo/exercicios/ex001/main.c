@@ -3,8 +3,8 @@
 typedef struct {
     char nome[50];
     int idade;
-    float media;
-}Aluno;
+    float nota;
+} Aluno;
 
 void lerDados(Aluno *aluno);
 void imprimirAlunos(Aluno alunos[], int quantidade);
@@ -16,47 +16,47 @@ int main(void) {
     scanf("%d", &quantidade);
     getchar();
 
-    //declarar o numero de structs do tipo aluno, ou seja, quantos alunos existem
+    // Declarar o número de structs do tipo Aluno, ou seja, quantos alunos existem
     Aluno alunos[quantidade];
 
     for (int i = 0; i < quantidade; i++) {
-        lerDados(&alunos[i]);//cada 'i' representa um aluno diferente dentro do programa
+        lerDados(&alunos[i]); // Cada 'i' representa um aluno diferente dentro do programa
     }
     imprimirAlunos(alunos, quantidade);
     calcularMediaTurma(alunos, quantidade);
 
-
     return 0;
 }
 
-void lerDados(Aluno *aluno) {//passa um ponteiro (*aluno) pois tem que alterar o conteudo das variaveis
-    //nome
+void lerDados(Aluno *aluno) { // Passa um ponteiro (*aluno) pois tem que alterar o conteúdo das variáveis
+    // Nome
     printf("Digite o nome do aluno: ");
     fgets(aluno->nome, sizeof(aluno->nome), stdin);
-    //idade
+    // Idade
     printf("Digite a idade do aluno: ");
     scanf("%d", &aluno->idade);
-    //media
-    printf("Digite a media do aluno: ");
-    scanf("%f", &aluno->media);
+    // Nota
+    printf("Digite a nota do aluno: ");
+    scanf("%f", &aluno->nota);
     getchar();
 }
 
 void imprimirAlunos(Aluno alunos[], int quantidade) {
+    printf("\nLista de Alunos:\n");
     for (int i = 0; i < quantidade; i++) {
-        printf("Nome: %s\n"
-               "Idade: %.2d\n"
-               "Media: %.2f\n", alunos[i].nome, alunos[i].idade, alunos[i].media);
+        printf("\nAluno %d\n", i + 1); // Começando a contagem do aluno em 1
+        printf("Nome: %s", alunos[i].nome);
+        printf("Idade: %d\n", alunos[i].idade);
+        printf("Nota: %.2f\n", alunos[i].nota);
     }
 }
 
 void calcularMediaTurma(Aluno alunos[], int quantidade) {
     float soma = 0;
-    //somando todas as notas
+    // Somando todas as notas
     for (int i = 0; i < quantidade; i++) {
-        soma += alunos[i].media;
+        soma += alunos[i].nota;
     }
     float media = soma / quantidade;
-    printf("Media geral da turma: %.2f\n", media);
-
+    printf("\nMédia geral da turma: %.2f\n", media);
 }
