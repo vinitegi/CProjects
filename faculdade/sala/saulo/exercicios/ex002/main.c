@@ -14,7 +14,6 @@ modificar o preço de um produto específico.
 */
 
 
-
 #include <stdio.h>
 #define N 10 // Defina o número de produtos a serem cadastrados
 
