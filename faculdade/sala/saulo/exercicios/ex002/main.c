@@ -1,5 +1,21 @@
-#include <stdio.h>
+/*• Criar uma struct Produto com os atributos:
+    typedef struct {
+    char nome[30];
+    float preco;
+    int quantidade;
+    } Produto;
+• Criar um array de structs para armazenar N produtos.
+• Criar uma função void cadastrarProduto(Produto *produto), que solicita ao
+usuário os dados de um produto.
+• Criar uma função void listarProdutos(Produto produtos[], int quantidade),
+que exibe os produtos cadastrados.
+• Criar uma função void atualizarPreco(Produto *produto), que permite
+modificar o preço de um produto específico.
+*/
 
+
+
+#include <stdio.h>
 #define N 10 // Defina o número de produtos a serem cadastrados
 
 typedef struct {
