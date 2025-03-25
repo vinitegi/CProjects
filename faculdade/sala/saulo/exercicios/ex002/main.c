@@ -15,6 +15,7 @@ modificar o preço de um produto específico.
 
 
 #include <stdio.h>
+#include <string.h>
 #define N 10 // Defina o número de produtos a serem cadastrados
 
 typedef struct {
@@ -41,6 +42,8 @@ int main() {
         printf("0 - Sair\n");
         printf("Escolha uma opcao: ");
             scanf("%d", &opcao);
+        while (getchar() != '\n'); // Limpa o buffer para evitar problemas com fgets()
+
 
         switch (opcao) {
             case 1:
@@ -84,10 +87,11 @@ int main() {
 
 void cadastrarProduto(Produto *produto) {
     printf("\nDigite o nome do produto: ");
-        scanf("%s", produto->nome);
-    printf("Digite o preco do produto: ");
+        fgets(produto->nome, 30, stdin);
+    produto->nome[strcspn(produto->nome, "\n")] = 0; // Remove o '\n'
+    printf("\nDigite o preco do produto: ");
         scanf("%f", &produto->preco);
-    printf("Digite a quantidade do produto: ");
+    printf("\nDigite a quantidade do produto: ");
         scanf("%d", &produto->quantidade);
     getchar();
 }
