@@ -1,0 +1,3 @@
+C:/Users/vinic/CLionProjects/CProjects/faculdade/sala/saulo/exercicios/testes/teste002/cmake-build-debug/CMakeFiles/teste002.dir
+C:/Users/vinic/CLionProjects/CProjects/faculdade/sala/saulo/exercicios/testes/teste002/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/vinic/CLionProjects/CProjects/faculdade/sala/saulo/exercicios/testes/teste002/cmake-build-debug/CMakeFiles/rebuild_cache.dir

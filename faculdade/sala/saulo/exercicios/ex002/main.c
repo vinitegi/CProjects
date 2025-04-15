@@ -108,6 +108,9 @@ void listarProdutos(Produto produtos[], int quantidade) {
 }
 
 void atualizarPreco(Produto *produto) {
+    /*nao precisa passar um indice pois dentro da funcao main
+     * ja esta sendo inserido o endereco de memoria desejado
+     */
     printf("\nDigite o novo preco para %s: ", produto->nome);
         scanf("%f", &produto->preco);
 }
