@@ -21,7 +21,7 @@
 // - O saque não deve exceder o saldo da conta
 
 #include <stdio.h>
-#define MAX 5 //maximo de 10 contas
+#define MAX 10 //maximo de 10 contas
 
 //structs e contas
 typedef struct {
