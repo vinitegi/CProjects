@@ -37,9 +37,9 @@ int main(void) {
 		printf("\n==== MENU AGENDA ====\n");
 		printf("1. Cadastrar compromisso\n");
 		printf("2. Excluir compromisso\n");
-		printf("3. Mostrar compromissos de um mês\n");
+		printf("3. Mostrar compromissos de um mes\n");
 		printf("4. Sair\n");
-		printf("Escolha uma opção: ");
+		printf("Escolha uma opcao: ");
 		scanf("%d", &opcao);
 
 		switch(opcao) {
@@ -56,7 +56,7 @@ int main(void) {
 				printf("Saindo...\n");
 				break;
 			default:
-				printf("Opção inválida! Tente novamente.\n");
+				printf("Opcao invalida! Tente novamente.\n");
 		}
 	} while(opcao != 4);
 
