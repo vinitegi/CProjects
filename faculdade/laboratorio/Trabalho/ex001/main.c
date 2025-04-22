@@ -52,7 +52,7 @@ int main(void) {
 				mostrarCompromisso(agenda, total);
 				break;
 			case 4:
-				printf("Saindo...\n");
+				printf("Agenda fechada!\n");
 				break;
 			default:
 				printf("Opcao invalida! Tente novamente.\n");
