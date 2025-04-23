@@ -124,18 +124,24 @@ void excluirCompromisso(Compromisso agenda[], int *total) {
 
 void mostrarCompromisso(Compromisso agenda[], int total) {
 	int mes;
-	printf("Digite o mes: ");
-	scanf("%d", &mes);
 
-	printf("\nCompromissos do mes\n");
-	for (int i = 0; i < total; i++) {
-		if (agenda[i].data.mes == mes) {
-			printf("%02d/%02d/%04d - %02d:%02d:%02d - %s\n",
-				   agenda[i].data.dia, agenda[i].data.mes, agenda[i].data.ano,
-				   agenda[i].horario.hora, agenda[i].horario.minutos, agenda[i].horario.segundos,
-				   agenda[i].Descricao);
+	if (total <= 0) {
+		printf("Ainda nao exitem compromissos cadastrados!\n\n");
+	} else {
+		printf("Digite o mes: ");
+		scanf("%d", &mes);
+
+		printf("\nCompromissos do mes\n");
+		for (int i = 0; i < total; i++) {
+			if (agenda[i].data.mes == mes) {
+				printf("%02d/%02d/%04d - %02d:%02d:%02d - %s\n",
+					   agenda[i].data.dia, agenda[i].data.mes, agenda[i].data.ano,
+					   agenda[i].horario.hora, agenda[i].horario.minutos, agenda[i].horario.segundos,
+					   agenda[i].Descricao);
+			}
 		}
 	}
+
 }
 
 int existeCompromisso(Compromisso agenda[], int total, Data data, Horario horario) {
