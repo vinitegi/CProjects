@@ -1,0 +1,3 @@
+C:/Users/vinic/CLionProjects/CProjects/faculdade/sala/diniz/p2/cmake-build-debug/CMakeFiles/p2.dir
+C:/Users/vinic/CLionProjects/CProjects/faculdade/sala/diniz/p2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/vinic/CLionProjects/CProjects/faculdade/sala/diniz/p2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
