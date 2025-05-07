@@ -17,15 +17,19 @@ void modificarProduto(Produto item[], int total);
 void excluirProduto(Produto item[], int *total);
 void listarProdutos(Produto item[], int total); //finalizada
 void pesquisarPorId(Produto item[], int total, int id);
-void salvarProdutos(Produto item[], int total); //finalizada
-void carregarProdutos(Produto item[], int *total); //finalizada
+void salvarProdutos(FILE *arq, Produto item[], int total); //finalizada
+void carregarProdutos(FILE *arq, Produto item[], int *total); //finalizada
 
 int main(void) {
     Produto item[MAX_PRODUTOS];
     int id;
     int opcao;
 
-    carregarProdutos(item, &total);
+    FILE *arq = fopen("produtos.txt", "a+");
+    if (arq != NULL) {
+        carregarProdutos(arq, item, &total);
+        fclose(arq);
+    }
 
     do {
         printf("\n--- MENU ---\n");
@@ -57,7 +61,7 @@ int main(void) {
                 pesquisarPorId(item, total, id);
                 break;
             case 6:
-                salvarProdutos(item, total);
+                salvarProdutos(arq, item, total);
                 printf("Encerrando o programa.\n");
                 break;
             default:
@@ -117,34 +121,23 @@ void pesquisarPorId(Produto item[], int total, int id){
 
 }
 
-void salvarProdutos(Produto item[], int total){ //salva os produtos no arquivo
-    FILE *arq = fopen("produtos.txt", "a");
-    if (arq == NULL) {
-        printf("Erro ao salvar os dados!");
-        return;
-    }
-
+void salvarProdutos(FILE *arq, Produto item[], int total){ //salva os produtos no arquivo
     for (int i = 0; i < total; i++) {
-        fprintf("%i;%[^;];%[^;];%.2f", item[i].id,
-                item[i].nome, item[i].tipo, item[i].valor);;
+        fprintf(arq, "%i;%s;%s;%f\n",
+            item[i].id,
+            item[i].nome,
+            item[i].tipo,
+            item[i].valor);
     }
-
-    fclose(arq);
 }
 
-void carregarProdutos(Produto item[], int *total){ //copia os produtos salvos no arquivo para o vetor
-    //vai servir pra qnd o programa for reiniciado
-    FILE *f = fopen("produtos.txt", "r");
-    if (f == NULL) return;
-
-    while(fscanf(f, "%d;%[^;];%[^;];%f\n", //%[^;] vai ler ate o ';', enquanto o '%s' vai ler ate o primeiro espaco
-           &item[*total].id,
-           item[*total].nome,
-           item[*total].tipo,
-           &item[*total].valor) == 4) { //enquanto conseguir ler os quatro itens por linha, vai rodar o codigo
-                (*total)++;
-           }
-
-    fclose(f);
+void carregarProdutos(FILE *arq, Produto item[], int *total){ //copia os produtos salvos no arquivo para o vetor
+    while (fscanf(arq, "%d;%[^;];%[^;];%lf\n", //enquanto fscanf conseguir ler exatamente 4 itens por linha, vai continuar
+                  &item[*total].id,
+                  item[*total].nome,
+                  item[*total].tipo,
+                  &item[*total].valor) == 4) {
+        (*total)++;
+    }
 }
 
