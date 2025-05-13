@@ -10,8 +10,6 @@ typedef struct {
     double valor;
 } Produto;
 
-int total = 0;
-
 void cadastrarProduto(Produto item[], int *total); //finalizada
 void modificarProduto(Produto item[], int total);
 void excluirProduto(Produto item[], int *total);
@@ -22,23 +20,24 @@ void carregarProdutos(Produto item[], int *total); //finalizada
 
 int main(void) {
     Produto item[MAX_PRODUTOS];
+    int total = 0;
     int opcao;
 
     //qnd o programa iniciar, total sempre sera igual a 0, mas a função carregarProdutos muda isso
     carregarProdutos(item, &total);
 
     do {
-        printf("\n--- MENU ---\n");
-        printf("1. Inserir produto\n");
-        printf("2. Alterar produto\n");
-        printf("3. Excluir produto\n");
-        printf("4. Listar produtos\n");
-        printf("5. Pesquisar por ID\n");
-        printf("6. Salvar produtos\n");
-        printf("7. Encerrar programa\n");
-        printf("Escolha uma opcao: ");
-        scanf("%d", &opcao);
-        getchar();
+        printf("\n--- MENU ---\n"
+               "1. Inserir produto\n"
+               "2. Alterar produto\n"
+               "3. Excluir produto\n"
+               "4. Listar produtos\n"
+               "5. Pesquisar por ID\n"
+               "6. Salvar produtos\n"
+               "7. Encerrar programa\n"
+               "Escolha uma opcao: ");
+            scanf("%d", &opcao);
+            getchar();
 
         switch(opcao) {
             case 1:
@@ -59,11 +58,15 @@ int main(void) {
             case 6:
                 salvarProdutos(item, total);
                 break;
+
             default:
                 printf("Opcao inválida!\n");
                 break;
         }
     } while(opcao != 7);
+
+    //pra salvar automaticamente, caso o usuario esqueca de salvar manualmente
+    salvarProdutos(item, total);
     printf("Encerrando o programa.\n");
 
     return 0;
@@ -222,7 +225,8 @@ void carregarProdutos(Produto item[], int *total) { //copia os produtos salvos n
         return;
     }
 
-    while (fscanf(arq, "%d;%[^;];%[^;];%lf\n",
+    while (*total < MAX_PRODUTOS && //evita o limite de produtos seja atingido
+        fscanf(arq, "%d;%[^;];%[^;];%lf\n",
                   &item[*total].id,
                   item[*total].nome,
                   item[*total].tipo,
