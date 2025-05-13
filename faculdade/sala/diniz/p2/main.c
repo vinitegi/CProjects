@@ -16,15 +16,15 @@ void cadastrarProduto(Produto item[], int *total); //finalizada
 void modificarProduto(Produto item[], int total);
 void excluirProduto(Produto item[], int *total);
 void listarProdutos(Produto item[], int total); //finalizada
-void pesquisarPorId(Produto item[], int total, int id);
+void pesquisarPorId(Produto item[], int total);
 void salvarProdutos(Produto item[], int total); //finalizada
 void carregarProdutos(Produto item[], int *total); //finalizada
 
 int main(void) {
     Produto item[MAX_PRODUTOS];
-    int id;
     int opcao;
 
+    //qnd o programa iniciar, total sempre sera igual a 0, mas a função carregarProdutos muda isso
     carregarProdutos(item, &total);
 
     do {
@@ -54,9 +54,7 @@ int main(void) {
                 listarProdutos(item, total);
                 break;
             case 5:
-                printf("Digite o ID do produto: ");
-                scanf("%d", &id);
-                pesquisarPorId(item, total, id);
+                pesquisarPorId(item, total);
                 break;
             case 6:
                 salvarProdutos(item, total);
@@ -73,23 +71,23 @@ int main(void) {
 
 void cadastrarProduto(Produto item[], int *total) {
     if (*total >= MAX_PRODUTOS) {
-        printf("Numero maximo de produtos atingido");
+        printf("Numero maximo de produtos atingido\n");
     } else {
         printf("Informe o ID do produto: ");
-        scanf("%d", &item[*total].id);
-        getchar();
+            scanf("%d", &item[*total].id);
+            getchar();
 
         printf("Informe o nome do produto: ");
-        fgets(item[*total].nome, sizeof(item[*total].nome), stdin);
-        item[*total].nome[strcspn(item[*total].nome, "\n")] = '\0';
+            fgets(item[*total].nome, sizeof(item[*total].nome), stdin);
+            item[*total].nome[strcspn(item[*total].nome, "\n")] = '\0';
 
         printf("Informe o tipo do produto: ");
-        fgets(item[*total].tipo, sizeof(item[*total].tipo), stdin);
-        item[*total].tipo[strcspn(item[*total].tipo, "\n")] = '\0';
+            fgets(item[*total].tipo, sizeof(item[*total].tipo), stdin);
+            item[*total].tipo[strcspn(item[*total].tipo, "\n")] = '\0';
 
         printf("Informe o valor do produto: ");
-        scanf("%lf", &item[*total].valor);
-        getchar();
+            scanf("%lf", &item[*total].valor);
+            getchar();
 
         (*total)++;
     }
@@ -108,20 +106,20 @@ void modificarProduto(Produto item[], int total) {
         for (int i = 0; i < total; i++) {
             if (codigoBusca == item[i].id) {
                 printf("Digite o novo nome do produto: ");
-                fgets(item[i].nome, sizeof(item[i].nome), stdin);
-                item[i].nome[strcspn(item[i].nome, "\n")] = 0;
+                    fgets(item[i].nome, sizeof(item[i].nome), stdin);
+                    item[i].nome[strcspn(item[i].nome, "\n")] = 0;
 
                 printf("Digite o novo tipo do produto: ");
-                fgets(item[i].tipo, sizeof(item[i].tipo), stdin);
-                item[i].tipo[strcspn(item[i].tipo, "\n")] = 0;
+                    fgets(item[i].tipo, sizeof(item[i].tipo), stdin);
+                    item[i].tipo[strcspn(item[i].tipo, "\n")] = 0;
 
                 printf("Digite o novo valor do produto: ");
-                scanf("%lf", &item[i].valor);
-                getchar();
+                    scanf("%lf", &item[i].valor);
+                    getchar();
 
                 printf("Produto alterado com sucesso!\n");
                 encontrado = 1;
-                break;
+                break; //usa 'break' para encerrar o 'for', se usasse 'return' encerraria a função
             }
         }
 
@@ -132,10 +130,12 @@ void modificarProduto(Produto item[], int total) {
 }
 
 void excluirProduto(Produto item[], int *total) {
+    //nao vai apagar do arquivo, vai apagar na arrey de struct, eh necessario salvar dps
     if (*total == 0) {
         printf("Nenhum produto cadastrado!\n");
     } else {
         int codigoBusca;
+        int encontrado = 0;
 
         printf("Digite o ID do produto que deseja excluir: ");
         scanf("%d", &codigoBusca);
@@ -148,25 +148,33 @@ void excluirProduto(Produto item[], int *total) {
 
                 (*total)--;
                 printf("Produto excluido com sucesso\n");
-                return;
+                encontrado = 1;
+                break;
             }
         }
-        printf("Produto com o ID %d nao encontrado!\n", codigoBusca);
+        if (!encontrado) {
+            printf("Produto com o ID %d nao encontrado!\n", codigoBusca);
+        }
     }
 }
 
-void pesquisarPorId(Produto item[], int total, int id) {
+void pesquisarPorId(Produto item[], int total) {
+    int codigoBusca;
+
+    printf("Digite o ID do produto: ");
+        scanf("%d", &codigoBusca);
+
     if (total == 0) {
         printf("Nenhum produto cadastrado!\n");
     } else {
         for (int i = 0; i < total; i++) {
-            if (id == item[i].id) {
+            if (codigoBusca == item[i].id) {
                 printf("Produto encontrado: %s - %s - R$ %.2lf\n",
                        item[i].nome, item[i].tipo, item[i].valor);
-                return;
+                return; //usando o o return, ele fecha a funcao e nao roda as proximas intrucoes da msm
             }
         }
-        printf("Produto com ID %d nao encontrado!\n", id);
+        printf("Produto com ID %d nao encontrado!\n", codigoBusca);
     }
 }
 
@@ -205,20 +213,24 @@ void salvarProdutos(Produto item[], int total) { //salva os produtos no arquivo
     }
 
     fclose(arq);
-    printf("Produtos salvos com sucesseco!\n");
+    printf("Produtos salvos com sucesso!\n");
 }
 
 void carregarProdutos(Produto item[], int *total) { //copia os produtos salvos no arquivo para o vetor
     FILE *arq = fopen("produtos.txt", "r");
-    if (arq == NULL) return;
+    if (arq == NULL) {
+        return;
+    }
 
     while (fscanf(arq, "%d;%[^;];%[^;];%lf\n",
                   &item[*total].id,
                   item[*total].nome,
                   item[*total].tipo,
-                  &item[*total].valor) == 4) {
+                  &item[*total].valor) == 4){
         (*total)++;
+        //se conseguir ler todos os 4 campos corretamente, salva os dados no vetor item[*total], e aumente *total
     }
+
 
     fclose(arq);
 }
