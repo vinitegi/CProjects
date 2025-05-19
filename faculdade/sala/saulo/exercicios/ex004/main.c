@@ -37,14 +37,19 @@ int main() {
 
     do {
         printf("\nMenu:\n"
-        "1. Cadastrar triângulo\n"
-        "2. Listar todos os triângulos\n"
-        "3. Listar somente os equiláteros\n"
-        "4. Listar somente os isósceles\n"
+        "1. Cadastrar triangulo\n"
+        "2. Listar todos os triangulos\n"
+        "3. Listar somente os equilateros\n"
+        "4. Listar somente os isosceles\n"
         "5. Listar somente os escalenos\n"
         "6. Alterar dados\n"
-        "0. Sair\n ");
-        opcao = input_d("Digite a acao desejada");
+        "0. Sair\n");
+        opcao = input_d("Digite a acao desejada: ");
+
+        if (opcao == 0) {
+            printf("Encerrando o programa!\n");
+            break;
+        }
 
         switch (opcao) {
             case 1:
@@ -70,12 +75,13 @@ int main() {
 
             case 6:
                 alterarTriangulo(t, total);
+                salvarNoArquivo(t, total);
                 break;
 
             default:
                 printf("Opcao invalida!]\n");
         }
-    } while (opcao != 0);
+    } while (1); //enqunto for verdadeiro
 
     return 0;
 }
@@ -87,15 +93,15 @@ void cadastrarTriangulos(Triangulo t[], int *total){
         return;
     }
 
-    t[*total].lado1 = input_d("Digite o lado 1 do triangulo");
-    t[*total].lado2 = input_d("Digite o lado 2 do triangulo");
-    t[*total].lado3 = input_d("Digite o lado 3 do triangulo");
+    t[*total].lado1 = input_d("Digite o lado 1 do triangulo: ");
+    t[*total].lado2 = input_d("Digite o lado 2 do triangulo: ");
+    t[*total].lado3 = input_d("Digite o lado 3 do triangulo: ");
     t[*total].id = *total + 1;
 
     classificarTriangulos(&t[*total]);
 
     (*total)++;
-    printf("Triangulo cadastrado com sucesso!");
+    printf("Triangulo cadastrado com sucesso!\n");
 } //finalizada
 void classificarTriangulos(Triangulo *t){
     if (t->lado1 + t->lado2 <= t->lado3 ||
@@ -150,58 +156,92 @@ void carregarDoArquivo (Triangulo t[], int *total){
 
 //listagem
 void listarTodos(Triangulo t[], int total){
-    printf("\nID | Lado1 | Lado2 | Lado3 | Tipo\n");
-    printf("----------------------------------------\n");
-    for (int i = 0; i < total; i++) {
-        printf("%2d | %6d | %6d | %6d | %s\n",
-               t[i].id, t[i].lado1, t[i].lado2, t[i].lado3, t[i].tipo);
+    if (total == 0) {
+        printf("Nenhum triangulo cadastrado ate o momento!\n");
+        return;
     }
+        printf("\nID | Lado1 | Lado2 | Lado3 | Tipo\n");
+        printf("----------------------------------------\n");
+        for (int i = 0; i < total; i++) {
+            printf("%2d | %5d | %5d | %5d | %s\n",
+                   t[i].id, t[i].lado1, t[i].lado2, t[i].lado3, t[i].tipo);
+        }
+
 }
 void listarEsquilateros(Triangulo t[], int total){
-    printf("Triangulos Equilateros:\n");
-    for (int i = 0; i < total; i++) {
-        if (strcmp(t[i].tipo, "equilatero") == 0) {
-            printf("ID %d: %d %d %d\n", t[i].id, t[i].lado1, t[i].lado2, t[i].lado3);
-        }
+        if (total == 0) {
+        printf("Nenhum triangulo cadastrado ate o momento!\n");
+        return;
     }
+        printf("Triangulos Equilateros:\n");
+        for (int i = 0; i < total; i++) {
+            if (strcmp(t[i].tipo, "equilatero") == 0) {
+                printf("ID %d: %d %d %d\n", t[i].id, t[i].lado1, t[i].lado2, t[i].lado3);
+            } else {
+                printf("Nenhum triangulo Equilatero cadastrado no momento!\n");
+            }
+        }
+
+
 }//finalizada
 void listarIsosceles(Triangulo t[], int total){
-    printf("Triangulos Isosceles:\n");
-    for (int i = 0; i < total; i++) {
-        if (strcmp(t[i].tipo, "isosceles") == 0) {
-            printf("ID %d: %d %d %d\n", t[i].id, t[i].lado1, t[i].lado2, t[i].lado3);
-        }
+    if (total == 0) {
+        printf("Nenhum triangulo cadastrado ate o momento!\n");
+        return;
     }
+        printf("Triangulos Isosceles:\n");
+        for (int i = 0; i < total; i++) {
+            if (strcmp(t[i].tipo, "isosceles") == 0) {
+                printf("ID %d: %d %d %d\n", t[i].id, t[i].lado1, t[i].lado2, t[i].lado3);
+            } else {
+                printf("Nenhum triangulo Isosceles cadastrado no momento!\n");
+            }
+        }
+
+
 }//finalizada
 void listarEscaleno(Triangulo t[], int total){
-    printf("Triangulos Escaleno:\n");
-    for (int i = 0; i < total; i++) {
-        if (strcmp(t[i].tipo, "escaleno") == 0) {
-            printf("ID %d: %d %d %d\n", t[i].id, t[i].lado1, t[i].lado2, t[i].lado3);
-        }
+    if (total == 0) {
+        printf("Nenhum triangulo cadastrado ate o momento!\n");
+        return;
     }
+        printf("Triangulos Escaleno:\n");
+        for (int i = 0; i < total; i++) {
+            if (strcmp(t[i].tipo, "escaleno") == 0) {
+                printf("ID %d: %d %d %d\n", t[i].id, t[i].lado1, t[i].lado2, t[i].lado3);
+            } else {
+                printf("Nenhum triangulo Escaleno cadastrado no momento!\n");
+            }
+        }
+
+
 }//finalizada
 
 //mudanca
 void alterarTriangulo(Triangulo t[], int total){
     int idBusca = input_d("Digite o ID do triangulo que sera modificado:");
     int encontrado = 0;
-    for (int i = 0; i < total; i++) {
-        if (t[i].id == idBusca) {
-            printf("Triângulo atual: %d %d %d\n", t[i].lado1, t[i].lado2, t[i].lado3);
 
-            t[i].lado1 = input_d("Novo lado 1:");
-            t[i].lado2 = input_d("Novo lado 2:");
-            t[i].lado3 = input_d("Novo lado 3:");
-            classificarTriangulos(&t[i]);
+    if (total == 0) {
+        printf("Nenhum triangulo cadastrado ate o momento!\n");
+        return;
+    }
+        for (int i = 0; i < total; i++) {
+            if (t[i].id == idBusca) {
+                printf("Triangulo atual: %d %d %d\n", t[i].lado1, t[i].lado2, t[i].lado3);
 
-            printf("Triângulo alterado com sucesso.\n");
-            encontrado = 1;
-            break;
+                t[i].lado1 = input_d("Novo lado 1:");
+                t[i].lado2 = input_d("Novo lado 2:");
+                t[i].lado3 = input_d("Novo lado 3:");
+                classificarTriangulos(&t[i]);
+
+                printf("Triangulo alterado com sucesso.\n");
+                encontrado = 1;
+                break;
+            }
         }
-    }
 
-    if (!encontrado) {
-        printf("Triângulo com ID %d não encontrado.\n", idBusca);
-    }
+        if (!encontrado) {
+            printf("Triangulo com ID %d nao encontrado.\n", idBusca);
+        }
 }//finalizada
