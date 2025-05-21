@@ -181,57 +181,88 @@ void listarTodos(Triangulo t[], int total){
            t[i].id, t[i].lado1, t[i].lado2, t[i].lado3, t[i].tipo);
 }
     printf("-----------------------------------------------\n");
-
-
 }
-void listarEsquilateros(Triangulo t[], int total){
-        if (total == 0) {
-        printf("Nenhum triangulo cadastrado ate o momento!\n");
-        return;
-    }
-        printf("Triangulos Equilateros:\n");
-        for (int i = 0; i < total; i++) {
-            if (strcmp(t[i].tipo, "equilatero") == 0) {
-                printf("ID %d: %d %d %d\n", t[i].id, t[i].lado1, t[i].lado2, t[i].lado3);
-            } else {
-                printf("Nenhum triangulo Equilatero cadastrado no momento!\n");
-            }
-        }
-
-
-}//finalizada
-void listarIsosceles(Triangulo t[], int total){
+void listarEsquilateros(Triangulo t[], int total) {
     if (total == 0) {
         printf("Nenhum triangulo cadastrado ate o momento!\n");
         return;
     }
-        printf("Triangulos Isosceles:\n");
-        for (int i = 0; i < total; i++) {
-            if (strcmp(t[i].tipo, "isosceles") == 0) {
-                printf("ID %d: %d %d %d\n", t[i].id, t[i].lado1, t[i].lado2, t[i].lado3);
-            } else {
-                printf("Nenhum triangulo Isosceles cadastrado no momento!\n");
-            }
+
+    int encontrado = 0;
+    printf("Triangulos Equilateros:\n");
+    printf("--------------------------------------------------------\n");
+    printf("| %-3s | %-6s | %-6s | %-6s | %-10s |\n", "ID", "Lado1", "Lado2", "Lado3", "Tipo");
+    printf("--------------------------------------------------------\n");
+
+    for (int i = 0; i < total; i++) {
+        if (strcmp(t[i].tipo, "equilatero") == 0) {
+            printf("| %-3d | %-6d | %-6d | %-6d | %-10s |\n",
+                   t[i].id, t[i].lado1, t[i].lado2, t[i].lado3, t[i].tipo);
+            encontrado = 1;
         }
+    }
 
+    if (!encontrado) {
+        printf("| %-46s |\n", "Nenhum triangulo Equilatero cadastrado no momento!");
+    }
 
-}//finalizada
-void listarEscaleno(Triangulo t[], int total){
+    printf("--------------------------------------------------------\n");
+}
+
+void listarIsosceles(Triangulo t[], int total) {
     if (total == 0) {
         printf("Nenhum triangulo cadastrado ate o momento!\n");
         return;
     }
-        printf("Triangulos Escaleno:\n");
-        for (int i = 0; i < total; i++) {
-            if (strcmp(t[i].tipo, "escaleno") == 0) {
-                printf("ID %d: %d %d %d\n", t[i].id, t[i].lado1, t[i].lado2, t[i].lado3);
-            } else {
-                printf("Nenhum triangulo Escaleno cadastrado no momento!\n");
-            }
+
+    int encontrado = 0;
+    printf("Triangulos Isosceles:\n");
+    printf("--------------------------------------------------------\n");
+    printf("| %-3s | %-6s | %-6s | %-6s | %-10s |\n", "ID", "Lado1", "Lado2", "Lado3", "Tipo");
+    printf("--------------------------------------------------------\n");
+
+    for (int i = 0; i < total; i++) {
+        if (strcmp(t[i].tipo, "isosceles") == 0) {
+            printf("| %-3d | %-6d | %-6d | %-6d | %-10s |\n",
+                   t[i].id, t[i].lado1, t[i].lado2, t[i].lado3, t[i].tipo);
+            encontrado = 1;
         }
+    }
 
+    if (!encontrado) {
+        printf("| %-46s |\n", "Nenhum triangulo Isosceles cadastrado no momento!");
+    }
 
-}//finalizada
+    printf("--------------------------------------------------------\n");
+}
+
+void listarEscaleno(Triangulo t[], int total) {
+    if (total == 0) {
+        printf("Nenhum triangulo cadastrado ate o momento!\n");
+        return;
+    }
+
+    int encontrado = 0;
+    printf("Triangulos Escalenos:\n");
+    printf("--------------------------------------------------------\n");
+    printf("| %-3s | %-6s | %-6s | %-6s | %-10s |\n", "ID", "Lado1", "Lado2", "Lado3", "Tipo");
+    printf("--------------------------------------------------------\n");
+
+    for (int i = 0; i < total; i++) {
+        if (strcmp(t[i].tipo, "escaleno") == 0) {
+            printf("| %-3d | %-6d | %-6d | %-6d | %-10s |\n",
+                   t[i].id, t[i].lado1, t[i].lado2, t[i].lado3, t[i].tipo);
+            encontrado = 1;
+        }
+    }
+
+    if (!encontrado) {
+        printf("| %-46s |\n", "Nenhum triangulo Escaleno cadastrado no momento!");
+    }
+
+    printf("--------------------------------------------------------\n");
+}
+
 
 //mudanca
 void alterarTriangulo(Triangulo t[], int total){
