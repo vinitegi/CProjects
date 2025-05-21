@@ -181,7 +181,7 @@ void listarTodos(Triangulo t[], int total){
            t[i].id, t[i].lado1, t[i].lado2, t[i].lado3, t[i].tipo);
 }
     printf("-----------------------------------------------\n");
-}
+}//finalizada
 void listarEsquilateros(Triangulo t[], int total) {
     if (total == 0) {
         printf("Nenhum triangulo cadastrado ate o momento!\n");
@@ -207,8 +207,7 @@ void listarEsquilateros(Triangulo t[], int total) {
     }
 
     printf("--------------------------------------------------------\n");
-}
-
+}//finalizada
 void listarIsosceles(Triangulo t[], int total) {
     if (total == 0) {
         printf("Nenhum triangulo cadastrado ate o momento!\n");
@@ -234,8 +233,7 @@ void listarIsosceles(Triangulo t[], int total) {
     }
 
     printf("--------------------------------------------------------\n");
-}
-
+}//finalizada
 void listarEscaleno(Triangulo t[], int total) {
     if (total == 0) {
         printf("Nenhum triangulo cadastrado ate o momento!\n");
@@ -261,8 +259,7 @@ void listarEscaleno(Triangulo t[], int total) {
     }
 
     printf("--------------------------------------------------------\n");
-}
-
+}//finalizada
 
 //mudanca
 void alterarTriangulo(Triangulo t[], int total){
