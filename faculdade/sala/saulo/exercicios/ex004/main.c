@@ -135,9 +135,9 @@ void salvarNoArquivo (Triangulo t[], int total){
         return;
     }
 
-    fwrite(t, sizeof(Triangulo), total, arq);
+    fwrite(t, TAM_TRIANGULO, total, arq);
     /*t -> eh um ponteiro para o inicio do vetor de Triangulo, ou seja, &t[0]
-     *sizeof(Triangulo) -> o tamanho de cada elemento a ser gravado
+     *TAM_TRIANGULO -> o tamanho de cada elemento a ser gravado
      *total -> quantidade de elementos que serao gravados
      *arq -> ponteiro do arquivo
     */
@@ -152,13 +152,13 @@ int carregarDoArquivo (Triangulo t[], int *total){
         return 0;
     }
 
-    while (fread(&t[*total], sizeof(Triangulo), 1, arq)) {
+    while (fread(&t[*total], TAM_TRIANGULO, 1, arq)) {
         (*total)++;
     }
     /*ptr → onde os dados vão ser armazenados (&t[*total])
-     *size → tamanho de cada elemento a ser lido (sizeof(Triangulo))
+     *size → tamanho de cada elemento a ser lido (TAM_TRIANGULO)
      *count → quantos elementos desse tamanho você quer ler (aqui está o 1)
-     *      vai ler um elemento por vez. Mas como na se sabe qnts triangulos existem, o while vai rodar ate o final do arquivo
+     *vai ler um elemento por vez. Mas como na se sabe qnts triangulos existem, o while vai rodar ate o final do arquivo
      *stream → ponteiro para o arquivo
      */
     fclose(arq);
