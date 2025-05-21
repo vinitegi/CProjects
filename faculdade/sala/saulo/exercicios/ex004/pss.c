@@ -45,6 +45,8 @@
 #include <inttypes.h>
 #include <errno.h>
 #include <float.h>
+#include <stdlib.h>
+
 
 void limpa_buffer() {
     int lixo;

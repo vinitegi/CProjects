@@ -1,13 +1,16 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "pss.h"
 
 #define MAX 1000
 
 typedef struct {
-    int id, lado1, lado2, lado3;
+   unsigned int id, lado1, lado2, lado3;
     char tipo[12];
 }Triangulo;
+
+const long TAM_TRIANGULO = sizeof(Triangulo);
 
 //cadastros
 void cadastrarTriangulos(Triangulo t[], int *total);
@@ -15,7 +18,7 @@ void classificarTriangulos(Triangulo *t);
 
 //arquivos
 void salvarNoArquivo (Triangulo t[], int total);
-void carregarDoArquivo (Triangulo t[], int *total); //carrega os triangulos do arquivo para o programa
+int carregarDoArquivo (Triangulo t[], int *total); //carrega os triangulos do arquivo para o programa
 
 //listagem
 void listarTodos(Triangulo t[], int total);
@@ -31,19 +34,26 @@ int main() {
     int total = 0;
     int opcao;
 
-    carregarDoArquivo(t, &total);
+    if (carregarDoArquivo(t, &total)) {
+        printf("%ld registros carregados (%ld bytes).\n", total, TAM_TRIANGULO * total);
+    } else {
+        printf("Nenhum dado carregado!\n");
+    }
 
     //menu
 
     do {
-        printf("\nMenu:\n"
-        "1. Cadastrar triangulo\n"
-        "2. Listar todos os triangulos\n"
-        "3. Listar somente os equilateros\n"
-        "4. Listar somente os isosceles\n"
-        "5. Listar somente os escalenos\n"
-        "6. Alterar dados\n"
-        "0. Sair\n");
+        printf("\n****************************************\n"
+        "Menu:\n"
+        "1 - Cadastrar triangulo\n"
+        "2 - Listar todos os triangulos\n"
+        "3 - Listar somente os equilateros\n"
+        "4 - Listar somente os isosceles\n"
+        "5 - Listar somente os escalenos\n"
+        "6 - Alterar dados\n"
+        "0 - Sair\n"
+        "****************************************\n");
+
         opcao = input_d("Digite a acao desejada: ");
 
         if (opcao == 0) {
@@ -135,11 +145,11 @@ void salvarNoArquivo (Triangulo t[], int total){
     fclose(arq);
 
 }//finalizada
-void carregarDoArquivo (Triangulo t[], int *total){
+int carregarDoArquivo (Triangulo t[], int *total){
     FILE *arq = fopen("triangulos.bin", "rb");
     if (arq == NULL) {
-        printf("Erro ao salvar o arquivo!\n");
-        return;
+        printf("Arquivo nao encontrado ou corrompido!\n");
+        return 0;
     }
 
     while (fread(&t[*total], sizeof(Triangulo), 1, arq)) {
@@ -152,6 +162,7 @@ void carregarDoArquivo (Triangulo t[], int *total){
      *stream → ponteiro para o arquivo
      */
     fclose(arq);
+    return 1;
  }//finalizada
 
 //listagem
@@ -160,12 +171,17 @@ void listarTodos(Triangulo t[], int total){
         printf("Nenhum triangulo cadastrado ate o momento!\n");
         return;
     }
-        printf("\nID | Lado1 | Lado2 | Lado3 | Tipo\n");
-        printf("----------------------------------------\n");
-        for (int i = 0; i < total; i++) {
-            printf("%2d | %5d | %5d | %5d | %s\n",
-                   t[i].id, t[i].lado1, t[i].lado2, t[i].lado3, t[i].tipo);
-        }
+
+    printf("-----------------------------------------------\n");
+    printf("| %-3s | %-6s | %-6s | %-6s | %-10s |\n", "ID", "Lado1", "Lado2", "Lado3", "Tipo");
+    printf("-----------------------------------------------\n");
+
+    for (int i = 0; i < total; i++) {
+    printf("| %-3d | %-6d | %-6d | %-6d | %-10s |\n",
+           t[i].id, t[i].lado1, t[i].lado2, t[i].lado3, t[i].tipo);
+}
+    printf("-----------------------------------------------\n");
+
 
 }
 void listarEsquilateros(Triangulo t[], int total){

@@ -47,6 +47,8 @@
 #include <errno.h>
 #include <float.h>
 
+
+
 char input_c(const char *mensagem);
 void input_s(const char *mensagem, char *x, int tamanho);
 int input_d(const char *mensagem);
