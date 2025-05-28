@@ -58,7 +58,7 @@ int main(void) {
 
 void inserirLote(){
     char lote[14]; //lote sera o nome do arquivo
-    input_s("Digite o nome do lote (ex: 20_05_2025.txt): ", lote, sizeof(lote)); //ex: 02/04/2025
+    input_s("Digite o nome do lote que sera inserido (ex: 20_05_2025.txt): ", lote, sizeof(lote)); //ex: 02/04/2025
 
     FILE *arq_txt = fopen(lote, "r");
     if (!arq_txt) {
@@ -73,7 +73,7 @@ void inserirLote(){
     }
 
     Registro r;
-    strncpy(r.nome_arq, lote, 13);
+    strncpy(r.nome_arq, lote, 13); //copia de lote -> r.nome_arq
     r.nome_arq[13] = "\0";
 
     while (fscanf(arq_txt, "%d/%d/%d %lf", &r.dia, &r.mes, &r.ano, &r.litragem) == 4) { //enquanto ler os quatro valores com sucesso, permanece no loop
@@ -89,7 +89,7 @@ void inserirLote(){
 }
 void eliminarLote() {
     char lote[14];
-    input_s("Digite o nome do lote a ser removido (ex: 20_05_2025.txt): ", lote, sizeof(lote));
+    input_s("Digite o nome do lote que sera removido (ex: 20_05_2025.txt): ", lote, sizeof(lote));
 
     FILE *orig = fopen("dados.bin", "rb");
     if (!orig) {
@@ -109,8 +109,8 @@ void eliminarLote() {
     int removidos = 0;
 
     while (fread(&r, sizeof(Registro), 1, orig) == 1) { //arq -> struct
-    //le uma linha por vez do arq original 'dados.bin'
-    //dd / mm / aa litragem nome_arq
+    //le uma linha por vez do arq original 'dados.bin' e coloca no struct 'r'
+        //cada vez q le um registro, oq houver em 'r' sera sobreposto
 
         if (strcmp(r.nome_arq, lote) != 0) {
         //se o nome no struct for diferente de 'lote'
@@ -120,6 +120,7 @@ void eliminarLote() {
             removidos++;
         }
     }
+    //dd / mm / aa litragem nome_arq -> como esta no arquivo
 
     fclose(orig);
     fclose(temp);
@@ -134,11 +135,77 @@ void eliminarLote() {
 }
 
 void gerarSomatorioMensal(){
+    FILE *arq_bin = fopen("dados.bin", "rb");
+    if (!arq_bin) {
+        printf("Nao ha dados para gerar a listagem.\n");
+        return;
+    }
 
+    typedef struct {
+        int mes;
+        double litragemTotal;
+    }Agrupamento;
+
+    Agrupamento grupoAnual[12];
+    Registro r;
+
+    for (int i = 0; i < 12; i++) {
+        grupoAnual[i].mes = i + 1;
+        grupoAnual[i].litragemTotal = 0.0;
+    }
+
+    while (fread(&r, sizeof(Registro), 1, arq_bin) == 1) {
+        grupoAnual[r.mes - 1].litragemTotal += r.litragem;
+    }
+    fclose(arq_bin);
+
+    FILE *csv = fopen("somatorio.csv", "w");
+    if (!csv) {
+        printf("Erro ao criar arquivo listagem.csv\n");
+        fclose(arq_bin);
+        return;
+    }
+    fprintf(csv, "Mes,Litragem\n");
+
+    for (int i = 0; i < 12; i++) {
+        fprintf(csv, "%02d;%.2lf\n", grupoAnual[i].mes, grupoAnual[i].litragemTotal);
+    }
+
+    fclose(csv);
+
+    printf("Relatorio mensal gerado com sucesso: relatorio_mensal.csv\n");
 }
+
 void gerarListagem(){
 
+    FILE *arq_bin = fopen("dados.bin", "rb");
+    if (!arq_bin) {
+        printf("Nao ha dados para gerar a listagem.\n");
+        return;
+    }
+
+    FILE *csv = fopen("listagem.csv", "w");
+    if (!csv) {
+        printf("Erro ao criar arquivo listagem.csv\n");
+        fclose(arq_bin);
+        return;
+    }
+
+    //cabecalho do csv
+    fprintf(csv, "Data,Litragem,Lote\n");
+
+    Registro r;
+    while (fread(&r, sizeof(Registro), 1, arq_bin) == 1) {
+        fprintf(csv, "%02d/%02d/%04d,%.2lf,%s\n", r.dia, r.mes, r.ano, r.litragem, r.nome_arq);
+    }
+
+    fclose(arq_bin);
+    fclose(csv);
+
+    printf("Arquivo listagem.csv gerado com sucesso!\n");
+
 }
+
 void criarBinario(){
     FILE *bin = fopen("dados.bin", "rb");// tenta abrir em modo leitura binária
     if (bin == NULL) {// se o arq nao existir
