@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.31"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "projeto_coletaOleo",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "projeto_coletaOleo::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-projeto_coletaOleo-Debug-0a7f09ae170ad503a3f3.json",
+					"name" : "projeto_coletaOleo",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/vinic/CLionProjects/CProjects/faculdade/sala/ProjetoDeExtensao/projeto-coletaOleo/cmake-build-debug",
+		"source" : "C:/Users/vinic/CLionProjects/CProjects/faculdade/sala/ProjetoDeExtensao/projeto-coletaOleo"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
