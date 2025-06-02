@@ -1,13 +1,5 @@
 # ninja log v6
-4	287	7705700730527425	build.ninja	11711b9a3f1ca1a6
-40	136	7705700731828546	CMakeFiles/projeto_coletaOleo.dir/main.c.obj	cacd19ef86b48050
-44	138	7705700731869536	CMakeFiles/projeto_coletaOleo.dir/pss.c.obj	4da7cb23a167b9ca
-138	233	7705700732815878	projeto_coletaOleo.exe	d2aea88ab8bbd6a5
-21	110	7705705054053646	CMakeFiles/projeto_coletaOleo.dir/main.c.obj	cacd19ef86b48050
-110	205	7705705054946645	projeto_coletaOleo.exe	d2aea88ab8bbd6a5
-4	88	7705705615894160	CMakeFiles/projeto_coletaOleo.dir/main.c.obj	cacd19ef86b48050
-88	179	7705705616738208	projeto_coletaOleo.exe	d2aea88ab8bbd6a5
-21	109	7705706219818100	CMakeFiles/projeto_coletaOleo.dir/main.c.obj	cacd19ef86b48050
-110	206	7705706220703763	projeto_coletaOleo.exe	d2aea88ab8bbd6a5
+4	287	7705795329276632	build.ninja	11711b9a3f1ca1a6
 21	111	7705709856062234	CMakeFiles/projeto_coletaOleo.dir/main.c.obj	cacd19ef86b48050
+44	138	7705700731869536	CMakeFiles/projeto_coletaOleo.dir/pss.c.obj	4da7cb23a167b9ca
 111	216	7705709856969721	projeto_coletaOleo.exe	d2aea88ab8bbd6a5
