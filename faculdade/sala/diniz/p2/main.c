@@ -59,6 +59,9 @@ int main(void) {
                 salvarProdutos(item, total);
                 break;
 
+            case 7:
+                printf("Saindo do sistema...\n");
+
             default:
                 printf("Opcao inválida!\n");
                 break;
